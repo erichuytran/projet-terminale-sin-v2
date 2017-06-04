@@ -15,7 +15,6 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/login', function(req, res, next) {
-    // you might like to do a database look-up or something more scalable here
 
     if (req.body.username && req.body.username === 'user' && req.body.password && req.body.password === 'pass') {
         console.log("AUTH OK");
@@ -44,7 +43,6 @@ router.get('/trainconfig', function(req, res, next) {
 
 
 router.post('/control', function(req, res, next) {
-    console.log(JSON.stringify(req.body));
     var dataTrains = JSON.parse(req.body);
 
     port.write(dataTrains, function(){
