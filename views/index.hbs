@@ -1,0 +1,97 @@
+<div class="container">
+    <h1>{{title}}</h1>
+    <p>take the control</p>
+
+    <form id="trainsController" name="trainsController" method="post" action="/control" class="">
+        <div class="col-md-6">
+            <div id="train0" class="panel panel-default">
+                <div class="panel-heading">TRAIN A</div>
+                <div class="panel-body">
+                    <label for="speed0">Speed</label>
+                    <!-- <input type="speed0" name="speed0" id="speed0" class="form-control trainParameters" value="{{values.speed0}}"> -->
+                    <input
+                    type="text"
+                    name="speed0"
+                    data-provide="slider"
+                    data-slider-min="0"
+                    data-slider-max="15"
+                    data-slider-step="1"
+                    data-slider-value="{{values.speed0}}"
+                    class="form-control trainParameters"
+                    >
+                    <div class="form-group">
+
+
+                        <div class="radio">
+                            <label>
+                                <input type="radio" name="light0" id="light01" class="trainParameters" value="1" checked>
+                                Switch ON light
+                            </label>
+                        </div>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="light0" id="light02" class="trainParameters" value="0">
+                            Switch OFF light
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-6">
+            <div id="train1" class="panel panel-default">
+                <div class="panel-heading">TRAIN B</div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="speed1">Speed</label>
+                        <!-- <input type="speed1" name="speed1" id="speed1" class="form-control trainParameters"> -->
+                        <input
+                        type="text"
+                        name="speed1"
+                        data-provide="slider"
+                        data-slider-min="0"
+                        data-slider-max="15"
+                        data-slider-step="1"
+                        data-slider-value="{{values.speed1}}"
+                        class="form-control trainParameters"
+                        >
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="light1" id="light11" class="trainParameters" value="1" checked>
+                            Switch ON light
+                        </label>
+                    </div>
+                    <div class="radio">
+                        <label>
+                            <input type="radio" name="light1" id="light12" class="trainParameters" value="0">
+                            Switch OFF light
+                        </label>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <button type="submit" class="btn btn-default">Submit</button>
+    </form>
+</div>
+<script type="text/javascript">
+
+//$("[name='light1']").bootstrapSwitch();
+
+$(".trainParameters").change(function(){
+    /* METHODE SYNCHRONE */
+    //$("#trainsController").submit();
+    /* METHODE ASYNCHRONE : AJAX */
+    $.ajax({
+        method: "POST",
+        url: "/control",
+        //data: { name: "John", location: "Boston" }
+        data: $("#trainsController").serialize()
+    })
+    .done(function( msg ) {
+        console.log( "Data Saved: " + msg );
+    });
+});
+</script>
