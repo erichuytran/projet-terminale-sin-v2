@@ -13,6 +13,22 @@
     <script src="/javascripts/bootstrap-switch.min.js" charset="utf-8"></script>
   </head>
   <body>
+
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+        <div class="container">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="/">Le Tchoutchou</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right">
+                <li class="navbar-right"><a href="/trainconfig"> <span class="glyphicon glyphicon-tasks" aria-hidden="true"></span> Controle</a></li>
+
+                {{#if user.authenticated}}
+                <li class="navbar-right"><a href="/logout"> <span class="glyphicon glyphicon-off" aria-hidden="true"></span> Deconnexion</a></li>
+                {{/if}}
+            </ul>
+        </div>
+    </nav>
+
     {{{body}}}
   </body>
 </html>
