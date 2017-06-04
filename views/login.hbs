@@ -1,0 +1,19 @@
+<div class="container">
+    {{#each flash}}
+        <div class="alert alert-{{type}} alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            {{message}}
+        </div>
+    {{/each}}
+    <form class="form-signin" method="post" action="/login">
+        <h2 class="form-signin-heading">Connexion</h2>
+        <label for="inputEmail" class="sr-only">Nom d'"'utilisateur</label>
+        <input type="text" id="username" name="username" class="form-control" placeholder="Nom d'utilisateur" required autofocus>
+        <label for="inputPassword" class="sr-only">Mot de passe</label>
+        <input type="password" id="password" name="password" class="form-control" placeholder="Mot de passe" required>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit">Se connecter</button>
+    </form>
+
+</div>
+<!-- /container -->
