@@ -10,11 +10,16 @@ var port = new SerialPort('/dev/ttyACM0', {
   baudRate: 9600 //vitesse de transmission de la liason série (voir sketch Arduino)
 });
 
-port.open(function(err){
-  if (err) {
-    throw err;
-    //simuArduino.open
-  }
+port.open();
+
+// port.open(function(err){
+//   if (err) {
+//     throw err;
+//   }
+// });
+
+port.on('open', function(){
+  console.log('Port ouvert avec succès !');
 });
 
 /* GET home page. */
