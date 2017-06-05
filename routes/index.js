@@ -12,12 +12,6 @@ var port = new SerialPort('/dev/ttyACM0', {
 
 port.open();
 
-// port.open(function(err){
-//   if (err) {
-//     throw err;
-//   }
-// });
-
 port.on('open', function(){
   console.log('Port ouvert avec succès !');
 });
@@ -57,15 +51,13 @@ router.get('/trainconfig', function(req, res, next) {
 
 
 router.post('/control', function(req, res, next) {
+  console.log(req.body);
     var dataTrains = JSON.stringify(req.body);
 
     port.write(dataTrains, function(){
-      console.log('Train A : ' + 'Vitesse = ' + req.body.speed0 + 'Light = ' + req.body.light0 +
-      ' - Train B :' + 'Vitesse = ' + req.body.speed1 + 'Light = ' + req.body.light1);
+      console.log('Train A : ' + 'Vitesse = ' + req.body.speed0 + ' Light = ' + req.body.light0 +
+      ' - Train B :' + 'Vitesse = ' + req.body.speed1 + ' Light = ' + req.body.light1);
     });
-
-    // console.log('Train A : ' + 'Vitesse = ' + req.body.speed0 + ' Light = ' + req.body.light0 +
-    // ' - Train B :' + ' Vitesse = ' + req.body.speed1 + ' Light = ' + req.body.light1);
 
     res.json("ok");
 });

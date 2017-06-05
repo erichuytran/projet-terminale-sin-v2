@@ -8,7 +8,7 @@
                 <div class="panel-body">
                     <label for="speed0">Speed</label>
                     <!-- <input type="speed0" name="speed0" id="speed0" class="form-control trainParameters" value="{{values.speed0}}"> -->
-                    <input
+                    <!-- <input
                     type="text"
                     name="speed0"
                     data-provide="slider"
@@ -17,7 +17,13 @@
                     data-slider-step="1"
                     data-slider-value="{{values.speed0}}"
                     class="form-control trainParameters"
-                    >
+                    > -->
+                    <div class="form-group">
+                      <input type="number" id="speed0" name="speed0" class="form-control trainParameters" placeholder="Vitesse" value="0">
+                      <!-- <button type="button" id="minus0" class="btn btn-default">-</button>
+                      <button type="button" id="add0" class="btn btn-default pull-right">+</button> -->
+                    </div>
+
                     <div class="form-group">
 
 
@@ -45,7 +51,7 @@
                     <div class="form-group">
                         <label for="speed1">Speed</label>
                         <!-- <input type="speed1" name="speed1" id="speed1" class="form-control trainParameters"> -->
-                        <input
+                        <!-- <input
                         type="text"
                         name="speed1"
                         data-provide="slider"
@@ -54,7 +60,12 @@
                         data-slider-step="1"
                         data-slider-value="{{values.speed1}}"
                         class="form-control trainParameters"
-                        >
+                        > -->
+                        <div class="form-group">
+                          <input type="number" id="speed1" name="speed1" class="form-control trainParameters" placeholder="Vitesse" value="0">
+                          <!-- <button type="button" id="minus1" class="btn btn-default">-</button>
+                          <button type="button" id="add1" class="btn btn-default pull-right">+</button> -->
+                        </div>
                     </div>
                     <div class="radio">
                         <label>
@@ -73,8 +84,33 @@
 
         </div>
     </form>
+    <button id="emergency"role="button" class="btn btn-default center-block">EMERGENCY STOP</button>
 </div>
 <script type="text/javascript">
+
+$("#minus0").click(function () {
+  if (parseInt($("#speed0").val()) > 0) {
+    $("#speed0").val(parseInt($("#speed0").val()) - 1);
+  };
+})
+
+$("#add0").click(function () {
+  if (parseInt($("#speed0").val()) < 15) {
+    $("#speed0").val(parseInt($("#speed0").val()) + 1);
+  };
+})
+
+$("#minus1").click(function () {
+  if (parseInt($("#speed1").val()) > 0) {
+    $("#speed1").val(parseInt($("#speed1").val()) - 1);
+  };
+})
+
+$("#add1").click(function () {
+  if (parseInt($("#speed1").val()) < 15) {
+    $("#speed1").val(parseInt($("#speed1").val()) + 1);
+  };
+})
 
 //$("[name='light1']").bootstrapSwitch();
 
@@ -88,6 +124,24 @@ $(".trainParameters").change(function(){
     })
     .done(function( msg ) {
         console.log( "Data Saved: " + msg );
+    });
+});
+
+$("#emergency").click(function(){
+    /* METHODE ASYNCHRONE : AJAX */
+    $('#light02').prop("checked", "true")
+    $('#speed0').prop("value", "0")
+    $('#light12').prop("checked", "true")
+    $('#speed1').prop("value", "0")
+
+    $.ajax({
+        method: "POST",
+        url: "/control",
+        //data: { name: "John", location: "Boston" }
+        data:  $("#trainsController").serialize()
+    })
+    .done(function( msg ) {
+        console.log( "EMERGENCY STOP" );
     });
 });
 </script>
